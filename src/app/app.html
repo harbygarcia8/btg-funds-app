@@ -1,1 +1,4 @@
+<app-loader [visible]="uiFeedback.isLoading()" />
+<app-success-alert [message]="uiFeedback.successMessage()" (dismiss)="uiFeedback.clearSuccess()" />
+<app-error-alert [message]="uiFeedback.errorMessage()" (dismiss)="uiFeedback.clearError()" />
 <router-outlet />

@@ -1,10 +1,18 @@
 <div class="card">
-  <div class="category-badge" [class]="fund().category.toLowerCase()">
-    {{ fund().category }}
+  <div class="card-head">
+    <div class="category-badge" [class]="fund().category.toLowerCase()">
+      {{ fund().category }}
+    </div>
+    <span class="category-icon">{{ getCategoryIcon(fund().category) }}</span>
   </div>
   <h3>{{ fund().name }}</h3>
-  <p class="min-amount">
-    Mínimo: <strong>{{ fund().minAmount | currency }}</strong>
-  </p>
-  <button (click)="subscribe.emit(fund())">Invertir ahora</button>
+  <p class="description">{{ getCategoryDescription(fund().category) }}</p>
+  <div class="divider"></div>
+  <div class="card-footer">
+    <div class="min-amount">
+      <span>Inversión mínima</span>
+      <strong>{{ fund().minAmount | currency }}</strong>
+    </div>
+    <button (click)="subscribe.emit(fund())">Invertir ahora</button>
+  </div>
 </div>

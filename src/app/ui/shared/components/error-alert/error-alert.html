@@ -1,0 +1,6 @@
+@if (message()) {
+  <div class="feedback error" role="alert" aria-live="assertive">
+    <span>{{ message() }}</span>
+    <button type="button" aria-label="Cerrar mensaje de error" (click)="dismiss.emit()">×</button>
+  </div>
+}

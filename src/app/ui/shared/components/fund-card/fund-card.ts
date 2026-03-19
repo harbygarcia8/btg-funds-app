@@ -11,5 +11,13 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class FundCard {
   fund = input.required<Fund>();
-  subscribe = output<Fund>(); // Usamos output() en lugar de @Output
+  subscribe = output<Fund>();
+
+  getCategoryDescription(category: Fund['category']): string {
+    return category === 'FPV' ? 'Fondo de pension voluntaria' : 'Fondo de inversion colectiva';
+  }
+
+  getCategoryIcon(category: Fund['category']): string {
+    return category === 'FPV' ? '📈' : '🏦';
+  }
 }
