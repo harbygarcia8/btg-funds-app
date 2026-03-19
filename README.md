@@ -1,59 +1,45 @@
-# BtgFundsApp
+# BTG Funds App - Gestión de Fondos (FPV/FIC)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+Esta aplicación permite a los clientes de BTG Pactual gestionar sus fondos de inversión (FPV y FIC), permitiendo suscripciones, cancelaciones y seguimiento de movimientos con un saldo inicial de COP $500.000.
 
-## Development server
+## 🚀 Stack Tecnológico
 
-To start a local development server, run:
+- **Framework:** Angular v21 (Signals, Standalone Components, Control Flow)
+- **Lenguaje:** TypeScript (Strict Mode)
+- **Estado:** Angular Signals & RxJS
+- **Estilos:** SCSS (Arquitectura modular)
+- **Pruebas:** Vitest & Angular Testing Library
+- **Herramientas:** ESLint & Prettier
 
+## 🏗️ Arquitectura y Patrones de Diseño
+
+El proyecto implementa una **Arquitectura Hexagonal (Puertos y Adaptadores)** para garantizar el desacoplamiento entre la lógica de negocio y el framework.
+
+### Capas del Proyecto:
+
+1.  **Domain (Núcleo):** Contiene los modelos de datos (`models`), constantes de negocio (`constants`) y las interfaces que definen el contrato del sistema. Es puramente TypeScript y no depende de Angular.
+2.  **Application (Casos de Uso):** Orquestan la lógica de negocio. Aquí se encuentran los `Use Cases` que interactúan con los **Puertos** (Interfaces de Repositorio).
+3.  **Infrastructure (Adaptadores):** Implementaciones concretas de los puertos. Se utiliza un `MockFundAdapter` para simular la persistencia y la API REST, inyectado mediante un `InjectionToken`.
+4.  **UI (Componentes/Páginas):** La capa de presentación que utiliza Angular Signals para una reactividad eficiente y componentes standalone para una estructura modular.
+
+### Patrones Utilizados:
+- **Dependency Inversion:** Los casos de uso dependen de interfaces (ports), no de implementaciones concretas.
+- **Strategy Pattern:** El sistema de notificaciones permite elegir entre Email y SMS.
+- **Observable/Observer:** Uso de RxJS para flujos de datos asíncronos.
+- **Signals Pattern:** Gestión de estado granular y eficiente en la UI.
+
+## 🧪 Estrategia de Testing
+
+Se implementó una pirámide de pruebas unitarias cubriendo todas las capas:
+
+- **Domain Tests:** Validación de constantes y reglas de negocio base.
+- **Application Tests:** Pruebas de los Casos de Uso mockeando el Repositorio para asegurar la lógica de orquestación.
+- **UI Tests:** Pruebas de componentes con **Angular Testing Library**, enfocadas en la interacción del usuario y accesibilidad (AXE).
+
+Para ejecutar las pruebas:
 ```bash
-ng serve
+npm test
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* PRUEBA TÉCNICA HECHA POR: **CEIBA SOFTWARE**
+* IMPLEMENTADA POR: **HARBY GARCIA GRAJALES** 
