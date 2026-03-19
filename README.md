@@ -4,6 +4,9 @@ Aplicación web para gestionar fondos de inversión BTG (FPV/FIC), con suscripci
 
 Saldo inicial asumido: **COP $500.000**.
 
+## Video funcional de la aplicación.
+https://uconet-my.sharepoint.com/:v:/g/personal/harby_garcia8016_uco_net_co/IQCxf0mSfv6bR77ykQicQauMAb9nZvxVsNCJ0OmeuhunGUs?e=LUNRrt
+
 ## Stack tecnológico
 
 - **Framework:** Angular 21 (standalone components, control flow, signals)
