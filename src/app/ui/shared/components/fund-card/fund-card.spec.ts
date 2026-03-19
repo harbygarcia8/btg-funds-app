@@ -7,7 +7,7 @@ describe('FundCard', () => {
 
   it('debería mostrar el nombre y monto mínimo del fondo', async () => {
     await render(FundCard, {
-      componentInputs: { fund: mockFund }
+      componentInputs: { fund: mockFund },
     });
 
     expect(screen.getByText(/Fondo Test/i)).toBeTruthy();
@@ -18,7 +18,7 @@ describe('FundCard', () => {
     const subscribeSpy = vi.fn();
     await render(FundCard, {
       componentInputs: { fund: mockFund },
-      on: { subscribe: subscribeSpy }
+      on: { subscribe: subscribeSpy },
     });
 
     const button = screen.getByRole('button', { name: /Invertir ahora/i });
