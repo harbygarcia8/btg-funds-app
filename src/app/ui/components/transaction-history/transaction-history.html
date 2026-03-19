@@ -1,0 +1,51 @@
+@let subscription = 'subscription';
+@let cancelation = 'cancelation';
+<div class="history-container">
+  <h3>Historial de Movimientos</h3>
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Fondo</th>
+          <th>Tipo</th>
+          <th>Notificado por</th>
+          <th>Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (transaction of transactions(); track transaction.id) {
+          <tr>
+            <td>{{ transaction.date | date: 'short' }}</td>
+            <td>{{ transaction.fundName }}</td>
+            <td>
+              <span class="badge" [class]="transaction.type">
+                {{ transaction.type === subscription ? 'Suscripción' : 'Cancelación' }}
+              </span>
+            </td>
+            <td>{{ transaction.notificationType }}</td>
+            <td [class.amount-plus]="transaction.type === cancelation">
+              {{ transaction.type === cancelation ? '+' : '-' }}
+              {{ transaction.amount | currency }}
+            </td>
+            <td>
+              @if (transaction.type === subscription) {
+                <button
+                  (click)="cancel.emit(transaction.fundId)"
+                  class="btn-cancel"
+                  [disabled]="isAlreadyCancelled(transaction.fundId)"
+                >
+                  {{ isAlreadyCancelled(transaction.fundId) ? 'Cancelado' : 'Cancelar' }}
+                </button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4" class="empty-msg">No hay movimientos registrados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

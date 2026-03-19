@@ -1,0 +1,50 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <header>
+      <h3>Suscribirse a {{ fund().name }}</h3>
+      <button class="close-btn" (click)="close.emit()">×</button>
+    </header>
+
+    <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+      <!-- Campo: Monto -->
+      <div class="form-group">
+        <label for="amount">Monto a invertir (Mínimo: {{ fund().minAmount | currency }})</label>
+        <input
+          id="amount"
+          type="number"
+          formControlName="amount"
+          [class.error]="isFieldInvalid('amount')"
+          placeholder="0.00"
+        />
+        @if (isFieldInvalid('amount')) {
+          <small class="error-msg">
+            @if (subscriptionForm.get('amount')?.errors?.['required']) {
+              El monto es requerido
+            }
+            @if (subscriptionForm.get('amount')?.errors?.['min']) {
+              El monto mínimo es {{ fund().minAmount | currency }}
+            }
+          </small>
+        }
+      </div>
+
+      <!-- Campo: Notificación -->
+      <div class="form-group">
+        <label>Notificar por:</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" value="email" formControlName="notificationType" /> Email
+          </label>
+          <label> <input type="radio" value="sms" formControlName="notificationType" /> SMS </label>
+        </div>
+      </div>
+
+      <footer class="form-actions">
+        <button type="button" class="btn-secondary" (click)="close.emit()">Cancelar</button>
+        <button type="submit" class="btn-primary" [disabled]="subscriptionForm.invalid">
+          Confirmar Suscripción
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>

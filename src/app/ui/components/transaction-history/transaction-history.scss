@@ -1,0 +1,41 @@
+.history-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+th,
+td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.subscription {
+  background: #fff3cd;
+  color: #856404;
+}
+.cancelation {
+  background: #d4edda;
+  color: #155724;
+}
+.amount-plus {
+  color: var(--btg-success);
+  font-weight: bold;
+}
+.empty-msg {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+}
