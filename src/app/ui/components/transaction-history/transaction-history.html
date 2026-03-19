@@ -11,24 +11,25 @@
           <th>Tipo</th>
           <th>Notificado por</th>
           <th>Monto</th>
+          <th>Acción</th>
         </tr>
       </thead>
       <tbody>
         @for (transaction of transactions(); track transaction.id) {
           <tr>
-            <td>{{ transaction.date | date: 'short' }}</td>
-            <td>{{ transaction.fundName }}</td>
-            <td>
+            <td data-label="Fecha">{{ transaction.date | date: 'short' }}</td>
+            <td data-label="Fondo">{{ transaction.fundName }}</td>
+            <td data-label="Tipo">
               <span class="badge" [class]="transaction.type">
                 {{ transaction.type === subscription ? 'Suscripción' : 'Cancelación' }}
               </span>
             </td>
-            <td>{{ transaction.notificationType }}</td>
-            <td [class.amount-plus]="transaction.type === cancelation">
+            <td data-label="Notificado por">{{ transaction.notificationType || 'N/A' }}</td>
+            <td data-label="Monto" [class.amount-plus]="transaction.type === cancelation">
               {{ transaction.type === cancelation ? '+' : '-' }}
               {{ transaction.amount | currency }}
             </td>
-            <td>
+            <td data-label="Acción" class="action-cell">
               @if (transaction.type === subscription) {
                 <button
                   (click)="cancel.emit(transaction.fundId)"
@@ -42,7 +43,7 @@
           </tr>
         } @empty {
           <tr>
-            <td colspan="4" class="empty-msg">No hay movimientos registrados.</td>
+            <td colspan="6" class="empty-msg">No hay movimientos registrados.</td>
           </tr>
         }
       </tbody>

@@ -1,21 +1,42 @@
 .history-container {
-  background: white;
+  background: var(--color-surface);
   padding: 1.5rem;
   border-radius: 12px;
   margin-top: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
 }
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
+  min-width: 760px;
 }
 th,
 td {
   text-align: left;
   padding: 12px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
 }
+
+th {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.action-cell {
+  text-align: right;
+  white-space: nowrap;
+}
+
 .badge {
   padding: 4px 8px;
   border-radius: 4px;
@@ -23,19 +44,105 @@ td {
   font-weight: bold;
 }
 .subscription {
-  background: #fff3cd;
-  color: #856404;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
 }
 .cancelation {
-  background: #d4edda;
-  color: #155724;
+  background: var(--color-positive-bg);
+  color: var(--color-positive-text);
 }
 .amount-plus {
-  color: var(--btg-success);
+  color: var(--color-success);
   font-weight: bold;
 }
 .empty-msg {
   text-align: center;
-  color: #999;
+  color: var(--color-text-muted);
   padding: 2rem;
+}
+
+.btn-cancel {
+  border: 1px solid var(--color-danger);
+  background: transparent;
+  color: var(--color-danger);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 820px) {
+  .history-container {
+    padding: 1rem;
+  }
+
+  .table-responsive {
+    overflow-x: visible;
+  }
+
+  table {
+    min-width: 0;
+    margin-top: 0.75rem;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  tr {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface-elevated);
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: none;
+    padding: 0.1rem 0;
+    text-align: right;
+  }
+
+  td::before {
+    content: attr(data-label);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-align: left;
+    min-width: 110px;
+  }
+
+  .action-cell {
+    justify-content: flex-end;
+  }
+
+  .action-cell::before {
+    margin-right: auto;
+  }
+
+  .empty-msg {
+    text-align: left;
+    padding: 0;
+  }
+
+  .empty-msg::before {
+    content: none;
+  }
 }

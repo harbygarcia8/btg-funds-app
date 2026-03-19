@@ -1,8 +1,13 @@
 <div class="modal-overlay">
   <div class="modal-content">
     <header>
-      <h3>Suscribirse a {{ fund().name }}</h3>
-      <button class="close-btn" (click)="close.emit()">×</button>
+      <div>
+        <p class="eyebrow">Nueva suscripcion</p>
+        <h3>Suscribirse a {{ fund().name }}</h3>
+      </div>
+      <button class="close-btn" type="button" (click)="close.emit()" aria-label="Cerrar modal">
+        ×
+      </button>
     </header>
 
     <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
@@ -14,8 +19,10 @@
           type="number"
           formControlName="amount"
           [class.error]="isFieldInvalid('amount')"
+          inputmode="decimal"
           placeholder="0.00"
         />
+        <small class="helper-msg">Ingresa un valor mayor o igual al monto minimo del fondo.</small>
         @if (isFieldInvalid('amount')) {
           <small class="error-msg">
             @if (subscriptionForm.get('amount')?.errors?.['required']) {
@@ -32,10 +39,13 @@
       <div class="form-group">
         <label>Notificar por:</label>
         <div class="radio-group">
-          <label>
-            <input type="radio" value="email" formControlName="notificationType" /> Email
+          <label class="radio-option">
+            <input type="radio" value="email" formControlName="notificationType" /> Correo
+            electronico
           </label>
-          <label> <input type="radio" value="sms" formControlName="notificationType" /> SMS </label>
+          <label class="radio-option">
+            <input type="radio" value="sms" formControlName="notificationType" /> SMS
+          </label>
         </div>
       </div>
 
