@@ -88,7 +88,7 @@
   }
 
   <section class="history-section">
-    <h3>Catalogo de inversiones</h3>
+    <h3>Catálogo de inversiones</h3>
     <div class="funds-grid catalog-grid">
       @for (fund of funds(); track fund.id) {
         <app-fund-card [fund]="fund" (subscribe)="openSubscriptionModal($event)" />
