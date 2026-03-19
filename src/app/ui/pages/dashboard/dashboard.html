@@ -1,0 +1,24 @@
+<div class="dashboard-container">
+  <app-balance-summary [balance]="balance()" />
+
+  <section class="funds-section">
+    @if (selectedFund()) {
+      <app-subscription-form
+        [fund]="selectedFund()!"
+        (close)="selectedFund.set(null)"
+        (success)="refreshData()"
+      />
+    }
+    <h3>Fondos Disponibles</h3>
+    <div class="funds-grid">
+      @for (fund of funds(); track fund.id) {
+        <app-fund-card [fund]="fund" (subscribe)="openSubscriptionModal($event)" />
+      } @empty {
+        <p>Cargando fondos disponibles...</p>
+      }
+    </div>
+  </section>
+  <section class="history-section">
+    <app-transaction-history [transactions]="history()" (cancel)="onCancel($event)" />
+  </section>
+</div>
