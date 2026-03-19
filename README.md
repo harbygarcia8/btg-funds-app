@@ -1,47 +1,117 @@
 # BTG Funds App - Gestión de Fondos (FPV/FIC)
 
-Esta aplicación permite a los clientes de BTG Pactual gestionar sus fondos de inversión (FPV y FIC), permitiendo suscripciones, cancelaciones y seguimiento de movimientos con un saldo inicial de COP $500.000.
+Aplicación web para gestionar fondos de inversión BTG (FPV/FIC), con suscripción, cancelación, historial de movimientos, validaciones de negocio y feedback visual en tiempo real.
 
-## 🚀 Stack Tecnológico
+Saldo inicial asumido: **COP $500.000**.
 
-- **Framework:** Angular v21 (Signals, Standalone Components, Control Flow)
-- **Lenguaje:** TypeScript (Strict Mode)
-- **Estado:** Angular Signals & RxJS
-- **Estilos:** SCSS (Arquitectura modular)
-- **Pruebas:** Vitest & Angular Testing Library
-- **Herramientas:** ESLint & Prettier
+## Stack tecnológico
 
-## 🏗️ Arquitectura y Patrones de Diseño
+- **Framework:** Angular 21 (standalone components, control flow, signals)
+- **Lenguaje:** TypeScript (strict mode)
+- **Estilos:** SCSS modular + tokens de tema (light/dark)
+- **Estado:** Signals + RxJS
+- **Testing:** Vitest + Angular Testing Library
+- **Calidad:** ESLint + Prettier
 
-El proyecto implementa una **Arquitectura Hexagonal (Puertos y Adaptadores)** para garantizar el desacoplamiento entre la lógica de negocio y el framework.
+## Arquitectura aplicada
 
-### Capas del Proyecto:
+Se implementa **Arquitectura Hexagonal (Ports & Adapters)**, separando dominio, casos de uso e infraestructura de la capa visual.
 
-1.  **Domain (Núcleo):** Contiene los modelos de datos (`models`), constantes de negocio (`constants`) y las interfaces que definen el contrato del sistema. Es puramente TypeScript y no depende de Angular.
-2.  **Application (Casos de Uso):** Orquestan la lógica de negocio. Aquí se encuentran los `Use Cases` que interactúan con los **Puertos** (Interfaces de Repositorio).
-3.  **Infrastructure (Adaptadores):** Implementaciones concretas de los puertos. Se utiliza un `MockFundAdapter` para simular la persistencia y la API REST, inyectado mediante un `InjectionToken`.
-4.  **UI (Componentes/Páginas):** La capa de presentación que utiliza Angular Signals para una reactividad eficiente y componentes standalone para una estructura modular.
+- **Domain:** modelos, reglas y contratos del negocio
+- **Application:** casos de uso (suscribir, cancelar, consultar saldo/listados/historial)
+- **Infrastructure:** adaptador mock del repositorio de fondos
+- **UI:** páginas y componentes atómicos/reutilizables
 
-### Patrones Utilizados:
+### Decisiones de diseño relevantes
 
-- **Dependency Inversion:** Los casos de uso dependen de interfaces (ports), no de implementaciones concretas.
-- **Strategy Pattern:** El sistema de notificaciones permite elegir entre Email y SMS.
-- **Observable/Observer:** Uso de RxJS para flujos de datos asíncronos.
-- **Signals Pattern:** Gestión de estado granular y eficiente en la UI.
+- Componentes standalone para modularidad y testeo aislado.
+- Tematización global con `ThemeService` y tokens SCSS.
+- Mensajes de usuario y UI de componentes compartidos:
+  - `app-success-alert`
+  - `app-error-alert`
+  - `app-loader`
+- Navegación por páginas:
+  - `dashboard`
+  - `historial`
 
-## 🧪 Estrategia de Testing
+## Diseño y UX implementados
 
-Se implementó una pirámide de pruebas unitarias cubriendo todas las capas:
+- Dashboard con enfoque financiero.
+- Catálogo de inversiones
+- Tabla de historial responsive:
+  - tabla clásica en desktop
+  - layout tipo tarjetas por fila en pantallas pequeñas.
+- Formulario de suscripción.
+- Soporte global de tema claro/oscuro.
 
-- **Domain Tests:** Validación de constantes y reglas de negocio base.
-- **Application Tests:** Pruebas de los Casos de Uso mockeando el Repositorio para asegurar la lógica de orquestación.
-- **UI Tests:** Pruebas de componentes con **Angular Testing Library**, enfocadas en la interacción del usuario y accesibilidad (AXE).
-
-Para ejecutar las pruebas:
+## Ejecución local
 
 ```bash
-npm test
+git clone https://github.com/harbygarcia8/btg-funds-app.git`
+cd btg-funds-app/
+npm install
+npm start
 ```
 
-- PRUEBA TÉCNICA HECHA POR: **CEIBA SOFTWARE**
-- IMPLEMENTADA POR: **HARBY GARCIA GRAJALES**
+Abrir: [http://localhost:4200](http://localhost:4200)
+
+## Scripts útiles para asegurar la calidad de código estático.
+
+```bash
+npm run test
+npm run build
+npm run lint
+npm run type:check
+npm run format:check
+npm run start
+```
+
+## Estrategia de pruebas
+
+Cobertura unitaria en capas de dominio, aplicación y UI:
+
+- Reglas de negocio
+- Casos de uso con repositorio mockeado
+- Componentes clave (suscripción, historial, dashboard, tarjetas, resumen)
+
+Estado actual: 
+* Test Files  15 passed (15)
+* Tests  28 passed (28)
+
+## Mejoras propuestas y nuevas implementaciones
+
+Para evolucionar el proyecto a un nivel de escalabilidad mayor,se podría tener en cuanta la implementación de:
+
+### 1) Storybook para UI y documentación viva
+
+Implementar **Storybook** para centralizar la documentación visual y funcional de los componentes reutilizables.
+
+Beneficios esperados:
+
+- Catálogo navegable de componentes (`fund-card`, `transaction-history`, `subscription-form`, alerts, loader, etc.).
+- Documentación de variantes de UI (temas, estados `loading`, `disabled`, `error`, vacíos, etc.).
+- Contratos de componentes claros (inputs/outputs) para facilitar mantenimiento y onboarding.
+- Validación visual aislada sin depender de páginas completas.
+
+### 2) Pruebas de integración y E2E con Playwright
+
+Incorporar una estrategia de pruebas por capas complementando la suite unitaria actual.
+
+**Pruebas de integración (UI + casos de uso + servicios):**
+
+- Validar flujos completos de suscripción y cancelación contra mocks controlados.
+- Verificar que el feedback global (`success/error/loader`) se muestre correctamente en cada escenario.
+- Probar navegación y estados entre `dashboard` e `historial`.
+
+**Pruebas E2E con Playwright:**
+
+- Recorrer journeys críticos de usuario en navegador real.
+- Validar reglas funcionales de negocio de punta a punta.
+- Asegurar comportamiento responsive y consistencia visual básica entre breakpoints.
+- Ejecutar smoke tests en CI para prevenir regresiones en producción.
+
+
+---
+
+- Prueba técnica: **Ceiba Software**
+- Implementación: **Harby Garcia Grajales**
