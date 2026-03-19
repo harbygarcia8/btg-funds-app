@@ -6,6 +6,7 @@
 Objetivo: Diseñar e implementar una aplicación web interactiva y responsiva que permita a
 un usuario final:
 ```
+
 ## Requisitos funcionales
 
 1. Visualizar la lista de fondos disponibles.
@@ -43,20 +44,16 @@ un usuario final:
 
 ## Fondos disponibles
 
-
-| ID | Nombre | Monto mínimo | Categoria |
-|----|------------|--------------|-----------|
-| 1  | FPV_BTG_PACTUAL_RECAUDADORA |COP $75.000 | FPV
-| 2  | FPV_BTG_PACTUAL_ECOPETROL |COP $125.000 | FPV
-| 3  | DEUDAPRIVADA |COP $50.000 | FIC
-| 4  | FDO-ACCIONES |COP $250.000 | FIC
-| 5  | FPV_BTG_PACTUAL_DINAMICA |COP $100.000 | FPV
-
+| ID  | Nombre                      | Monto mínimo | Categoria |
+| --- | --------------------------- | ------------ | --------- |
+| 1   | FPV_BTG_PACTUAL_RECAUDADORA | COP $75.000  | FPV       |
+| 2   | FPV_BTG_PACTUAL_ECOPETROL   | COP $125.000 | FPV       |
+| 3   | DEUDAPRIVADA                | COP $50.000  | FIC       |
+| 4   | FDO-ACCIONES                | COP $250.000 | FIC       |
+| 5   | FPV_BTG_PACTUAL_DINAMICA    | COP $100.000 | FPV       |
 
 ## Entregables
 
 - Código en repositorio público (GitHub, GitLab, etc.).
 - Instrucciones claras de ejecución (README.md).
 - Capturas o video corto del funcionamiento de la app (opcional, pero valorado).
-
-
