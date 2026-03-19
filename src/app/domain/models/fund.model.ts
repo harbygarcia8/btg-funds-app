@@ -12,7 +12,7 @@ export interface UserBalance {
 }
 
 export type NotificationType = 'email' | 'sms';
-export type TransactionType = 'subscription' | 'cancelation'
+export type TransactionType = 'subscription' | 'cancelation';
 
 export interface Transaction {
   id: string;

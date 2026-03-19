@@ -1,4 +1,4 @@
-import {Fund} from '../models/fund.model';
+import { Fund } from '../models/fund.model';
 
 export const INITIAL_BALANCE = 500000;
 
