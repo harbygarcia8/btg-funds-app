@@ -20,5 +20,6 @@ export interface Transaction {
   fundName: string;
   amount: number;
   type: TransactionType;
+  notificationType?: NotificationType;
   date: Date;
 }
