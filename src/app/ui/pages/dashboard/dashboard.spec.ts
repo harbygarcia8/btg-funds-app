@@ -6,6 +6,7 @@ import { GetBalanceUseCase } from '../../../application/use-cases/get-balance.us
 import { GetTransactionHistoryUseCase } from '../../../application/use-cases/get-transaction-history.use-case';
 import { CancelFundUseCase } from '../../../application/use-cases/cancel-fund.use-case';
 import { of } from 'rxjs';
+import { provideRouter } from '@angular/router';
 
 describe('Dashboard', () => {
   let component: Dashboard;
@@ -28,6 +29,7 @@ describe('Dashboard', () => {
     await TestBed.configureTestingModule({
       imports: [Dashboard],
       providers: [
+        provideRouter([]),
         { provide: ListFundsUseCase, useValue: mockListFundsUseCase },
         { provide: GetBalanceUseCase, useValue: mockGetBalanceUseCase },
         { provide: GetTransactionHistoryUseCase, useValue: mockGetHistoryUseCase },

@@ -1,0 +1,61 @@
+<div class="history-page">
+  <header class="top-nav">
+    <div class="brand">
+      <span>BTG PACTUAL</span>
+    </div>
+    <nav>
+      <a routerLink="/dashboard">Inicio</a>
+      <a class="active" routerLink="/historial">Historial</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Historial de movimientos</p>
+      <h1>Actividad de tus fondos</h1>
+      <p class="helper">Consulta y gestiona las suscripciones y cancelaciones de tu portafolio.</p>
+    </div>
+    <a class="btn-back" routerLink="/dashboard">Volver al dashboard</a>
+  </section>
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <p>Total movimientos</p>
+      <strong>{{ totalMovements() }}</strong>
+    </article>
+    <article class="stat-card">
+      <p>Suscripciones</p>
+      <strong>{{ subscriptionsCount() }}</strong>
+    </article>
+    <article class="stat-card">
+      <p>Cancelaciones</p>
+      <strong>{{ cancelationsCount() }}</strong>
+    </article>
+    <article class="stat-card">
+      <p>Monto total movido</p>
+      <strong>COP {{ totalAmount() | number: '1.0-0' }}</strong>
+    </article>
+  </section>
+
+  <section class="filters">
+    <button type="button" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">
+      Todos
+    </button>
+    <button
+      type="button"
+      [class.active]="activeFilter() === 'subscription'"
+      (click)="setFilter('subscription')"
+    >
+      Suscripciones
+    </button>
+    <button
+      type="button"
+      [class.active]="activeFilter() === 'cancelation'"
+      (click)="setFilter('cancelation')"
+    >
+      Cancelaciones
+    </button>
+  </section>
+
+  <app-transaction-history [transactions]="filteredHistory()" (cancel)="onCancel($event)" />
+</div>

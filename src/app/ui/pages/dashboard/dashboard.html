@@ -1,24 +1,100 @@
 <div class="dashboard-container">
-  <app-balance-summary [balance]="balance()" />
+  <header class="top-nav">
+    <div class="brand">
+      <span>Manejo de Fondos BTG</span>
+    </div>
+    <nav>
+      <a class="active" routerLink="/dashboard">Inicio</a>
+      <a routerLink="/historial">Historial</a>
+    </nav>
+    <div class="right-actions">
+      <button class="theme-toggle" type="button" (click)="toggleTheme()">
+        {{ currentTheme() === 'light' ? '🌛' : '☀️' }}
+      </button>
+      <div class="avatar" aria-label="Perfil de usuario">👨🏻‍💼</div>
+    </div>
+  </header>
 
-  <section class="funds-section">
-    @if (selectedFund()) {
-      <app-subscription-form
-        [fund]="selectedFund()!"
-        (close)="selectedFund.set(null)"
-        (success)="refreshData()"
-      />
-    }
-    <h3>Fondos Disponibles</h3>
-    <div class="funds-grid">
+  <section class="hero-strip">
+    <div>
+      <p class="eyebrow">Activos totales bajo gestion</p>
+      <h1>COP {{ balance() | number: '1.0-0' }}</h1>
+    </div>
+    <div class="performance">
+      <p class="eyebrow">Rendimiento 24h</p>
+      <p class="value">↗ +{{ weeklyPerformance() | number: '1.1-1' }}%</p>
+    </div>
+  </section>
+
+  <section class="dashboard-grid">
+    <aside class="left-column">
+      <article class="quick-actions card-shell">
+        <h3>Acciones rapidas</h3>
+        <button type="button" (click)="subscribeFromQuickActions()">
+          ⊕ Suscribirse a un fondo
+        </button>
+        <a class="quick-link" routerLink="/historial">◷ Ver historial</a>
+      </article>
+    </aside>
+
+    <article class="investments-card card-shell">
+      <header>
+        <div>
+          <h3>Inversiones activas</h3>
+          <p>Actualmente en tu portafolio privado</p>
+        </div>
+        <a href="#">Gestionar todo</a>
+      </header>
+
+      <div class="investment-list">
+        @for (investment of activeInvestments(); track investment.fundId) {
+          <div class="investment-row">
+            <div class="icon-badge">🏛️</div>
+            <div class="investment-info">
+              <strong>{{ investment.fundName }}</strong>
+              <small>Actualmente en tu portafolio privado</small>
+            </div>
+            <div class="investment-amount">
+              <strong>COP {{ investment.amount | number: '1.0-0' }}</strong>
+              <small>Posicion activa</small>
+            </div>
+            <button type="button" class="btn-cancel" (click)="onCancel(investment.fundId)">
+              Cancelar
+            </button>
+          </div>
+        } @empty {
+          <p class="empty-state">No hay inversiones activas por el momento.</p>
+        }
+      </div>
+
+      <footer class="risk-area">
+        <div class="risk-meta">
+          <p class="eyebrow">Asignacion de riesgo del portafolio</p>
+          <span>{{ riskPercentage() }}% {{ riskLabel() }}</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" [style.width.%]="riskPercentage()"></div>
+        </div>
+      </footer>
+    </article>
+  </section>
+
+  @if (selectedFund()) {
+    <app-subscription-form
+      [fund]="selectedFund()!"
+      (close)="selectedFund.set(null)"
+      (success)="refreshData()"
+    />
+  }
+
+  <section class="history-section">
+    <h3>Catalogo de inversiones</h3>
+    <div class="funds-grid catalog-grid">
       @for (fund of funds(); track fund.id) {
         <app-fund-card [fund]="fund" (subscribe)="openSubscriptionModal($event)" />
       } @empty {
-        <p>Cargando fondos disponibles...</p>
+        <p class="empty-state">Cargando fondos disponibles...</p>
       }
     </div>
-  </section>
-  <section class="history-section">
-    <app-transaction-history [transactions]="history()" (cancel)="onCancel($event)" />
   </section>
 </div>
