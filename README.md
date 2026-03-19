@@ -23,6 +23,7 @@ El proyecto implementa una **Arquitectura Hexagonal (Puertos y Adaptadores)** pa
 4.  **UI (Componentes/Páginas):** La capa de presentación que utiliza Angular Signals para una reactividad eficiente y componentes standalone para una estructura modular.
 
 ### Patrones Utilizados:
+
 - **Dependency Inversion:** Los casos de uso dependen de interfaces (ports), no de implementaciones concretas.
 - **Strategy Pattern:** El sistema de notificaciones permite elegir entre Email y SMS.
 - **Observable/Observer:** Uso de RxJS para flujos de datos asíncronos.
@@ -37,9 +38,10 @@ Se implementó una pirámide de pruebas unitarias cubriendo todas las capas:
 - **UI Tests:** Pruebas de componentes con **Angular Testing Library**, enfocadas en la interacción del usuario y accesibilidad (AXE).
 
 Para ejecutar las pruebas:
+
 ```bash
 npm test
 ```
 
-* PRUEBA TÉCNICA HECHA POR: **CEIBA SOFTWARE**
-* IMPLEMENTADA POR: **HARBY GARCIA GRAJALES** 
+- PRUEBA TÉCNICA HECHA POR: **CEIBA SOFTWARE**
+- IMPLEMENTADA POR: **HARBY GARCIA GRAJALES**

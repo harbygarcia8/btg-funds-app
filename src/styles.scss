@@ -1,10 +1,2 @@
-/* You can add global styles to this file, and also import other style files */
-:root {
-  --btg-primary: #002d72; /* Azul BTG */
-  --btg-secondary: #00a1de; /* Azul claro */
-  --btg-success: #28a745; /* Verde para saldos positivos */
-  --btg-error: #dc3545; /* Rojo para errores de saldo */
-  --btg-background: #f4f7f9; /* Gris muy claro para el fondo */
-  --btg-text: #333333;
-  --btg-white: #ffffff;
-}
+@use './styles/theme-tokens';
+@use './styles/base';

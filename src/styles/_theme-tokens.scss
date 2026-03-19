@@ -1,0 +1,54 @@
+:root {
+  --color-bg: #f3f6fb;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f9fbff;
+  --color-text: #10213f;
+  --color-text-muted: #5f6f8d;
+  --color-border: #89a6e3;
+  --color-primary: #12326f;
+  --color-primary-strong: #0b1f46;
+  --color-accent: #27b0ff;
+  --color-accent-soft: #dff4ff;
+  --color-success: #20b279;
+  --color-danger: #e74c5f;
+  --color-warning-bg: #fff4dc;
+  --color-warning-text: #805b00;
+  --color-positive-bg: #ddf8ec;
+  --color-positive-text: #0b7047;
+  --color-overlay: rgba(10, 18, 36, 0.58);
+
+  --shadow-sm: 0 6px 16px rgba(16, 33, 63, 0.08);
+  --shadow-md: 0 14px 30px rgba(16, 33, 63, 0.12);
+
+  // Compatibilidad hacia atras con tokens ya usados en componentes.
+  --btg-primary: var(--color-primary);
+  --btg-secondary: var(--color-accent);
+  --btg-success: var(--color-success);
+  --btg-error: var(--color-danger);
+  --btg-background: var(--color-bg);
+  --btg-text: var(--color-text);
+  --btg-white: var(--color-surface);
+}
+
+[data-theme='dark'] {
+  --color-bg: #0b1225;
+  --color-surface: #131f39;
+  --color-surface-elevated: #172746;
+  --color-text: #edf3ff;
+  --color-text-muted: #a5b4d1;
+  --color-border: #2a3a5f;
+  --color-primary: #5c8dff;
+  --color-primary-strong: #0a1174;
+  --color-accent: #39d6ff;
+  --color-accent-soft: #1b375b;
+  --color-success: #36d59f;
+  --color-danger: #ff7e8f;
+  --color-warning-bg: #4c390f;
+  --color-warning-text: #ffe08f;
+  --color-positive-bg: #133f2f;
+  --color-positive-text: #99f1c8;
+  --color-overlay: rgba(2, 6, 15, 0.7);
+
+  --shadow-sm: 0 8px 18px rgba(2, 6, 15, 0.35);
+  --shadow-md: 0 18px 34px rgba(2, 6, 15, 0.4);
+}
