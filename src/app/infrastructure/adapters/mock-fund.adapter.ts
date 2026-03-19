@@ -32,42 +32,45 @@ export class MockFundAdapter implements FundRepositoryPort {
       return throwError(new Error(`${MIN_AMOUNT_ERROR_MESSAGE} ${fund.minAmount}`));
     }
 
-    const newtransaction: Transaction = {
+    const newTransaction: Transaction = {
       id: Math.random().toString(36).substr(2, 9),
       fundId: fund.id,
       fundName: fund.name,
       amount: amount,
       type: 'subscription',
+      notificationType: notificationType,
       date: new Date(),
     };
 
     this.balance -= amount;
-    this.transactions.push(newtransaction);
+    this.transactions.push(newTransaction);
     this.myFunds.push(fundId);
 
-    return of(newtransaction).pipe(delay(800));
+    return of(newTransaction).pipe(delay(800));
   }
 
   cancelFund(fundId: string): Observable<Transaction> {
-    const lastSubscription = this.transactions.filter(t => t.fundId === fundId && t.type === 'subscription').pop();
+    const lastSubscription = this.transactions
+      .filter((t) => t.fundId === fundId && t.type === 'subscription')
+      .pop();
 
-    if (!lastSubscription) return throwError(new Error(DONT_HAVE_SUSCRIPTION_ACTIVE_FOR_THIS_FUND_MESSAGE));
+    if (!lastSubscription)
+      return throwError(new Error(DONT_HAVE_SUSCRIPTION_ACTIVE_FOR_THIS_FUND_MESSAGE));
 
     const cancelTransaction: Transaction = {
       id: Math.random().toString(36).substr(2, 9),
       fundId: fundId,
       fundName: lastSubscription.fundName,
       amount: lastSubscription.amount,
-      notificationType: lastSubscription.notificationType,
       type: 'cancelation',
+      notificationType: lastSubscription.notificationType,
       date: new Date(),
-    }
+    };
 
     this.balance += lastSubscription.amount;
     this.transactions.push(cancelTransaction);
 
     return of(cancelTransaction).pipe(delay(500));
-
   }
   getTransactionHistory(): Observable<Transaction[]> {
     return of([...this.transactions].reverse()).pipe(delay(300));
