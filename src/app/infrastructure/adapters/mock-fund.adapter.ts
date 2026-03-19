@@ -51,10 +51,10 @@ export class MockFundAdapter implements FundRepositoryPort {
 
   cancelFund(fundId: string): Observable<Transaction> {
     const lastSubscription = this.transactions
-      .filter((t) => t.fundId === fundId && t.type === 'subscription')
+      .filter((transaction) => transaction.fundId === fundId && transaction.type === 'subscription')
       .pop();
 
-    if (!lastSubscription)
+    if (!lastSubscription || lastSubscription.type !== 'subscription')
       return throwError(new Error(DONT_HAVE_SUSCRIPTION_ACTIVE_FOR_THIS_FUND_MESSAGE));
 
     const cancelTransaction: Transaction = {
